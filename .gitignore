@@ -1,6 +1,59 @@
-data.csv
+# Python
 __pycache__/
-.ipynb_checkpoints/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
 .env
 .venv/
-venv/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Project specific - DATA & MODEL (JANGAN PERNAH UPLOAD!)
+data/
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+models/
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+*.pid
+*.sock
+
+# Git
+*.orig
+*.bak

@@ -1,0 +1,17 @@
+streamlit
+langchain
+langchain-community
+langchain-ollama
+langchain-huggingface
+langchain-chroma
+pypdf
+sentence-transformers
+chromadb
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+scikit-learn
+xgboost
+gdown
