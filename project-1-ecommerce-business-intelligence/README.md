@@ -47,7 +47,6 @@ This project is developed in **6 sequential phases**, each focusing on different
 **AI & LLM**  
 `LangChain` · `RAG` · `OpenAI/Gemini` · `Vector Database`
 
-```
 ## Note
 This is **one project** developed in 6 sequential phases. Each phase builds the foundation for the next.
 
