@@ -1,11 +1,10 @@
 # Project 1: E-commerce Business Intelligence System
-```
+
 ## Goals
 Building an end-to-end BI system for e-commerce that delivers strategic insights to management, from raw data to actionable recommendations.
 
 ## Project Structure
 
-```
 project-1-ecommerce-business-intelligence/
 ├── phase-1-foundation/      # Code foundation (OOP, logging, data pipeline)
 ├── phase-2-churn/            # Customer churn prediction & segmentation
