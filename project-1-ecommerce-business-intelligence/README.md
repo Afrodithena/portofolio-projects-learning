@@ -4,15 +4,16 @@
 Building an end-to-end BI system for e-commerce that delivers strategic insights to management, from raw data to actionable recommendations.
 
 ## Project Structure
- project-1-ecommerce-business-intelligence
-├── 📁 phase-1-foundation/ # Code foundation (OOP, logging, data pipeline)
-├──  📁 phase-2-churn/ # Customer churn prediction & segmentation
-├──  📁 phase-3-pricing/ # Pricing strategy & product bundling 
-├── 📁 phase-4-delivery/ # Delivery analytics & SQL optimization 
-├── 📁 phase-5-dashboard/ # Business dashboard (Looker/Streamlit) 
-├── 📁 phase-6-portal/ # RAG + LLM peonalization portal 
-└── README.md
-
+📦 project-1-ecommerce-business-intelligence
+│
+├── 📁 phase-1-foundation      # Code foundation (OOP, logging, data pipeline) ⏳
+├── 📁 phase-2-churn            # Customer churn prediction & segmentation ⏳
+├── 📁 phase-3-pricing          # Pricing strategy & product bundling ⏳
+├── 📁 phase-4-delivery         # Delivery analytics & SQL optimization ⏳
+├── 📁 phase-5-dashboard        # Business dashboard (Looker/Streamlit) ⏳
+├── 📁 phase-6-portal           # RAG + LLM personalization portal ⏳
+│
+└── 📄 README.md
 ---
 ## Development Roadmap
 

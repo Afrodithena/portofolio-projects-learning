@@ -13,30 +13,24 @@ Currently focused on:
 ## Repository Structure
 ```
 portofolio-projects-learning
-├── 📁 archive/  # Exploratory notebooks (learning history)
-├── 📁 llm-learning1/   # Exploring about llm (learning history)
-├── 📁 mini-project-1-clean-coder # OOP, logging, type hints
-├── 📁 mini-project-2-api-wrapper # FastAPI, REST, JSON
-├── 📁 mini-project-3-docker-basics # Containerization
-├── 📁 main-project-1-rag-evaluator # RAG + statistical evaluation
-├── 📁 main-project-2-text2sql    # Text-to-SQL + validator
-└── 📁 main-project-3-hybrid-predictor # ML + LLM personalization
+├── 📁 archive/           # Exploratory notebooks
+├── 📁 llm-learning1/     # LLM experiments
+├── 📁 project-1/         # E-commerce BI (6 phases) 
+├── 📁 project-2/         # Credit Scoring (6 phases) 
+├── 📁 project-3/         # Medical Imaging (6 phases) 
+└── 📄 README.md
 ```
 
 
-*Note: `archive/` and 'llm-learning1/' contains early exploratory work. Active projects are in `mini-project-*` and `main-project-*`.*
+*Note: `archive/` and 'llm-learning1/' contains early exploratory work. Active projects are in `project-1`, `project-2`, and `project-3` with phased development*
 
 ---
 ## Projects Overview
-
-| Project | Focus |
-|--------|-------|
-| Mini Project 1 | Clean code, OOP, logging |
-| Mini Project 2 | FastAPI, REST API |
-| Mini Project 3 | Docker, containerization |
-| Main Project 1 | RAG system + statistical evaluation |
-| Main Project 2 | Text-to-SQL + query validation |
-| Main Project 3 | Hybrid ML + LLM personalization |
+| Project | Focus | Status |
+|--------|-------|--------|
+| **Project 1** | E-commerce Business Intelligence (6 phases) | 🟡 In Progress |
+| **Project 2** | Credit Scoring for Unbanked | ⚪ Not Started |
+| **Project 3** | Medical Imaging - Aneurysm Detection | ⚪ Not Started |
 
 ---
 
@@ -48,18 +42,6 @@ FastAPI · Docker · Git · PostgreSQL · Looker Studio
 **AI & LLM**  
 LangChain · HuggingFace · RAG
 
----
-
-## Status
-
-| Project | Status |
-|--------|--------|
-| Mini Project 1 | 🟡 In Progress |
-| Mini Project 2 | ⚪ Not Started |
-| Mini Project 3 | ⚪ Not Started |
-| Main Project 1 | ⚪ Planned |
-| Main Project 2 | ⚪ Planned |
-| Main Project 3 | ⚪ Planned |
 
 ---
 
