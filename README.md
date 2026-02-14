@@ -12,7 +12,7 @@ Currently focused on:
 
 ## Repository Structure
 ```
-📦 portofolio-projects-learning
+portofolio-projects-learning
 ├── 📁 archive/  # Exploratory notebooks (learning history)
 ├── 📁 llm-learning1/   # Exploring about llm (learning history)
 ├── 📁 mini-project-1-clean-coder # OOP, logging, type hints
