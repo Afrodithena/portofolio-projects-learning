@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Kinaya's Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/dashboard" class="navbar-brand">📊 Kinaya's Portfolio</a>
+            <div class="navbar-nav">
+                <span class="nav-user">👤 {{ user }}</span>
+                <a href="/logout" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>My Projects</h1>
+            <p style="color: var(--gray);">Click on any project to explore interactive demos</p>
+        </div>
+        
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="card project-card" onclick="location.href='/project/{{ project.id }}'">
+                <div class="project-icon">{{ project.icon }}</div>
+                <h3 class="card-title">{{ project.title }}</h3>
+                <p style="color: var(--gray); margin-bottom: 15px;">{{ project.description }}</p>
+                <div class="project-tags">
+                    {% for tag in project.tags %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3 style="margin-bottom: 10px;">Kinaya</h3>
+                    <p style="color: var(--gray);">Statistics Undergraduate · Data Science · AI Engineering</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Afrodithena" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/kinaya-rafa" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

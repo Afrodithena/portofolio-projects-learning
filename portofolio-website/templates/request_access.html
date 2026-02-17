@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Access - Kinaya's Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-page">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>🔐 Request Access</h1>
+            <p>Get access to my portfolio projects</p>
+        </div>
+        
+        <div class="alert alert-info">
+            <strong>Demo Credentials:</strong><br>
+            Username: <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 4px;">recruiter</code><br>
+            Password: <code style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 4px;">hireme2026</code>
+        </div>
+        
+        <div style="margin: 30px 0;">
+            <h3 style="margin-bottom: 15px;">📧 Contact Me</h3>
+            <p style="margin-bottom: 10px;">Untuk akses penuh atau pertanyaan, silakan hubungi:</p>
+            
+            <div style="background: var(--light); padding: 15px; border-radius: var(--radius-md); margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <span style="font-size: 1.5rem;">🔗</span>
+                    <div>
+                        <strong>LinkedIn</strong><br>
+                        <a href="https://linkedin.com/in/kinaya-rafa" target="_blank" style="color: var(--primary); text-decoration: none;">
+                            /in/kinaya-rafa
+                        </a>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5rem;">📧</span>
+                    <div>
+                        <strong>Email</strong><br>
+                        <span style="color: var(--gray);">kinaya.rafa@example.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="/login" class="btn btn-primary">Back to Login</a>
+        </div>
+    </div>
+</body>
+</html>

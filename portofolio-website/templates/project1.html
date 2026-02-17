@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 - Delivery Time Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/dashboard" class="navbar-brand">← Back to Dashboard</a>
+            <div class="navbar-nav">
+                <a href="/logout" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="project-header">
+        <div class="container">
+            <h1 class="project-title">📦 Delivery Time Prediction</h1>
+            <p class="project-subtitle">Predict delivery time based on order features using Random Forest</p>
+            <div style="margin-top: 20px;">
+                <span class="metrics-badge">Model: Random Forest</span>
+                <span class="metrics-badge">MAE: 2.3 days</span>
+                <span class="metrics-badge">R²: 0.76</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <!-- Prediction Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Try the Predictor</h3>
+                    <p style="color: var(--gray);">Enter order details to get estimated delivery time</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Total Price (R$)</label>
+                    <input type="number" class="form-control" id="totalPrice" value="250.00" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Number of Items</label>
+                    <input type="number" class="form-control" id="nItems" value="2" min="1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Freight Value (R$)</label>
+                    <input type="number" class="form-control" id="freight" value="25.00" step="0.01">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Purchase Month</label>
+                    <select class="form-control" id="month">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11" selected>November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-primary btn-block" id="predictBtn">Predict Delivery Time</button>
+            </div>
+
+            <!-- Result -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Prediction Result</h3>
+                </div>
+                
+                <div id="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p style="text-align: center; color: var(--gray);">Calculating prediction...</p>
+                </div>
+                
+                <div id="result" style="display: none;">
+                    <div class="result-box">
+                        <div class="result-label">Estimated Delivery Time</div>
+                        <div class="result-number" id="predictionValue">0</div>
+                        <div class="result-label">days</div>
+                    </div>
+                </div>
+                
+                <div id="initial" style="text-align: center; padding: 40px 0;">
+                    <p style="color: var(--gray);">Fill the form and click predict</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="card" style="margin-top: 30px;">
+            <div class="card-header">
+                <h3 class="card-title">Search Orders</h3>
+                <p style="color: var(--gray);">Search by order ID or customer name</p>
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control" id="search" placeholder="e.g., ORD-001 or João">
+            </div>
+            
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3 style="margin-bottom: 10px;">Project Details</h3>
+                    <p style="color: var(--gray);">Built with Python, Flask, and Random Forest</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Afrodithena" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/kinaya-rafa" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('predictBtn').addEventListener('click', function() {
+            // Hide initial, show loading
+            document.getElementById('initial').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            
+            // Get input values
+            const data = {
+                total_price: parseFloat(document.getElementById('totalPrice').value),
+                n_items: parseInt(document.getElementById('nItems').value),
+                total_freight: parseFloat(document.getElementById('freight').value),
+                purchase_month: parseInt(document.getElementById('month').value)
+            };
+            
+            // Call API
+            fetch('/api/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading').style.display = 'none';
+                
+                if (data.success) {
+                    document.getElementById('predictionValue').textContent = data.prediction;
+                    document.getElementById('result').style.display = 'block';
+                } else {
+                    alert('Error: ' + data.error);
+                    document.getElementById('initial').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('initial').style.display = 'block';
+                alert('Error: ' + error);
+            });
+        });
+
+        // Search functionality
+        let searchTimeout;
+        document.getElementById('search').addEventListener('input', function(e) {
+            clearTimeout(searchTimeout);
+            const query = e.target.value;
+            
+            if (query.length < 2) {
+                document.getElementById('searchResults').innerHTML = '';
+                return;
+            }
+            
+            searchTimeout = setTimeout(() => {
+                fetch('/api/search?q=' + encodeURIComponent(query))
+                .then(response => response.json())
+                .then(data => {
+                    let html = '';
+                    if (data.length === 0) {
+                        html = '<div class="alert alert-info">No results found</div>';
+                    } else {
+                        html = '<div class="search-results">';
+                        data.forEach(item => {
+                            html += `
+                                <div class="search-item">
+                                    <strong>${item.id}</strong> - ${item.customer}<br>
+                                    <small>R$ ${item.price.toFixed(2)} | ${item.status}</small>
+                                </div>
+                            `;
+                        });
+                        html += '</div>';
+                    }
+                    document.getElementById('searchResults').innerHTML = html;
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
