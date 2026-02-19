@@ -11,25 +11,15 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# to predict delivery time for olist ecommerce, gonna use Random forest regressor
-# Several reason why i choose random forest regressor:
-# 1. Delivery time (variable target) is a continuus value (days), not a label. So this is a regression problem, not classification.
-# 2. Delivery time can be influenced by many factor with non-linear relationships that can't be captured by simple linear models
-# 3. The EDA showed skewness and outliers in price, freight_values, etc. Random forest regressor handles outliers well without requiring special treatment (robust to outliers)
-# 4. Random forest is tree-based working by splitting on tresholds, doesn't require feature scalling like linear models or neural networks.
-# 5. Random forest provides built in feature importance to undestand what factors most affect delivery time (not manually from 'weight' each features)
-# 6. Works well with numerical and categorical features after encoding
-
-import os
-print("Current working directory:", os.getcwd())
-print("Does models folder exist?", os.path.exists("../models"))
 
 class DeliveryTimePredictor:
+    """
+    Random Forest model for predicting delivery time in days.
+    """
+    
     def __init__(self, n_estimators: int = 100, max_depth: int = 10,
-                 min_samples_split: int = 5,
-                 min_samples_leaf: int = 3,
-                 random_state: int = 42,
-                 n_jobs: int = -1):
+                 min_samples_split: int = 5, min_samples_leaf: int = 3,
+                 random_state: int = 42, n_jobs: int = -1):
         
         self.n_estimators = n_estimators
         self.max_depth = max_depth
@@ -42,7 +32,7 @@ class DeliveryTimePredictor:
         self.is_trained = False
         self.feature_names = None
 
-        logger.info(f"DeliveryTimePredictor Model initialized")
+        logger.info(f"DeliveryTimePredictor initialized")
         logger.info(f"n_estimators: {n_estimators}, max_depth: {max_depth}")
     
     def _initialize_model(self) -> RandomForestRegressor:
@@ -56,7 +46,7 @@ class DeliveryTimePredictor:
         )
     
     def train(self, X: pd.DataFrame, y: pd.Series, feature_names: Optional[list[str]] = None) -> Dict[str, float]:
-        logger.info(f"Start training with X shape: {X.shape}, y shape: {y.shape}")
+        logger.info(f"Training with X shape: {X.shape}, y shape: {y.shape}")
 
         if feature_names is None:
             self.feature_names = X.columns.tolist()
@@ -113,6 +103,7 @@ class DeliveryTimePredictor:
         
         import os
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
         model_data = {
             'model': self.model,
             'feature_names': self.feature_names,
@@ -131,7 +122,6 @@ class DeliveryTimePredictor:
     def load(self, filepath: str = None) -> None:        
         if filepath is None:
             filepath = "D:/portofolio-projects-learning/project-1-ecommerce-business-intelligence/phase-1-foundation/models/delivery_model.pkl"
-            model_data = joblib.load(filepath)
         
         model_data = joblib.load(filepath)
 
@@ -167,7 +157,6 @@ class DeliveryTimePredictor:
         return importance
 
 
-# testing 
 if __name__ == "__main__":
     print("Testing DeliveryTimePredictor")
     
@@ -188,18 +177,20 @@ if __name__ == "__main__":
 
     from sklearn.model_selection import train_test_split
     
-    X_train, X_pred, y_train, y_pred = train_test_split(X_test, y_test, test_size=0.2, random_state=42)
+    X_train, X_test_split, y_train, y_test_split = train_test_split(
+        X_test, y_test, test_size=0.2, random_state=42
+    )
     
     model = DeliveryTimePredictor(n_estimators=50, max_depth=5)
     
     train_metrics = model.train(X_train, y_train)
     print(f"Train metrics: {train_metrics}")
     
-    eval_metrics = model.evaluate(X_pred, y_pred)
+    eval_metrics = model.evaluate(X_test_split, y_test_split)
     print(f"Evaluation metrics: {eval_metrics}")
 
     importance = model.get_feature_importance()
-    print(importance)
+    print(importance.head())
 
     model.save()
     
